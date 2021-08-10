@@ -2,6 +2,7 @@
     <wb-module deploy-name="wrsistemas">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp/WEB-INF/lib"/>
         <property name="context-root" value="wrsistemas"/>
         <property name="java-output-path" value="/wrsistemas/build/classes"/>
     </wb-module>
