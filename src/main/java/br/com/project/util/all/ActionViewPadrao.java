@@ -38,6 +38,6 @@ public interface ActionViewPadrao extends Serializable{
 	
 	abstract String redirecionarFindEntidade() throws Exception;
 	
-	abstract void addMsg() throws Exception;
+	abstract void addMsg(String msg);
 
 }
