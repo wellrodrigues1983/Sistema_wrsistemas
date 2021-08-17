@@ -80,6 +80,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 		executeFlushSession();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T merge(T obj) throws Exception {
 		validaSessionFactory();
@@ -96,6 +97,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 		query.append(" select distinct(entity) from")
 		.append(entidade.getSimpleName()).append(" entity");
 		
+		@SuppressWarnings("unchecked")
 		List<T> lista = sessionFactory.getCurrentSession().createQuery(query.toString()).list();
 		
 		return lista;		

@@ -11,7 +11,7 @@
 		maxWait="10"
 		initialSize="10"
 		driverClassName="org.postgresql.Driver"
-		validationQuery="SELECT OK"
+		validationQuery="SELECT" 
 		testWhileIdle="true"
 		testOnBorrow="true"
 		numTestPerEvictionRun="5"
@@ -26,4 +26,5 @@
 <!-- Classe do tomcat que esta lendo esse arquivo é org.apache.tomcat.dbcp.PoolingDataSource -->
 <!-- POOL DE CONEXÕES -->
 <!-- https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html -->
+<!-- Opção-> validationQuery="SELECT" estava como validationQuery="SELECT OK" -->
 </Context>
