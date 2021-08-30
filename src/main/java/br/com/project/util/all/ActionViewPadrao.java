@@ -20,7 +20,7 @@ public interface ActionViewPadrao extends Serializable{
 	
 	/**
 	 * 
-	 * @return realiza inicialização de metodos, valores ou variaveis. 
+	 * @PostConstruct realiza inicialização de metodos, valores ou variaveis.
 	 * @throws Exception
 	 */
 	@PostConstruct
