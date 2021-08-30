@@ -11,8 +11,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -42,7 +42,7 @@ public class FilterOpenSessionInView extends DelegatingFilterProxy implements Se
 			ServletResponse servletResponse, FilterChain chain)
 			throws IOException, ServletException {
 
-		BasicDataSource springDataSource = (BasicDataSource) ContextLoaderListenerWrsistemasUtils.getBean("springDataSource");
+		DataSource springDataSource = (DataSource) ContextLoaderListenerWrsistemasUtils.getBean("springDataSource");
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		PlatformTransactionManager transactionManager = new DataSourceTransactionManager(springDataSource);
 		TransactionStatus status = transactionManager.getTransaction(def);
