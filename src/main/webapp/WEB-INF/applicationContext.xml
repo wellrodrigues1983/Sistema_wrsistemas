@@ -65,7 +65,7 @@
 		<property name="sqlMigrationSeparator" value="_" />
 		<property name="encoding" value="ISO-8859-1" />
 		<property name="validateOnMigrate" value="false" />
-		
+
 	</bean>
 
 
@@ -145,8 +145,18 @@
 		class="br.com.project.report.util.ReportUtil" />
 	<bean id="utilFramework"
 		class="br.com.framework.utils.UtilFramework" scope="session" />
-	<bean id="sessionController" class="br.com.project.geral.controller.SessionControllerImpl" scope="singleton"/>
-		
+	
+	
+	<!-- SERVICES -->	
+	<bean id="srvLogin" class="br.com.srv.implementacao.SrvLoginImpl"/>
+	
 
+	<!-- DAOS -->
+	<bean id="repositoryLogin" class="br.com.dao.implementacao.DaoLogin"/>
+	
 
+	<!-- CONTROLERS -->
+	<bean id="sessionController"
+		class="br.com.project.geral.controller.SessionControllerImpl"
+		scope="singleton" />
 </beans>

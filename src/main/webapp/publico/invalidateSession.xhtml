@@ -61,8 +61,7 @@
 		</p:dialog>
 
 	</h:body>
-</h:form>
-<script>
+	<script>
 
 
 $(function() {
@@ -70,14 +69,19 @@ $(function() {
 });
 
 function handleLoginRequest(xhr, status, args) {
+	
+		
     if(!args.loggedIn) {
         PF('dlg').jq.effect("shake", {times:5}, 100);
     }
     else {
         PF('dlg').hide();
-        logout('#{request.contextPath}');
+        document.location = '#{request.contextPath}' + "/j_spring_security_logout"
+//         logout('#{request.contextPath}');
     }
 }   
 
 </script>
+</h:form>
+
 </html>
