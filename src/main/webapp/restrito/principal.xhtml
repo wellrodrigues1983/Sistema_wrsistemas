@@ -8,18 +8,7 @@
 	xmlns:sec="http://www.springframework.org/security/facelets/tags"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html/ charset=UTF-8" />
-	<title><ui:insert name="titulo">WrSistemas</ui:insert></title>
-</h:head>
+<ui:composition template="/templates/templatePrincipal.xhtml">
 
-<h:form>
-	<h:body>
-		<ui:include src="/templates/barraProgresso.xhtml"/>
-		<h1>Principal</h1>
-		
-		<p:commandButton value="Testa status" ajax="true"/>
-
-	</h:body>
-</h:form>
+</ui:composition>
 </html>

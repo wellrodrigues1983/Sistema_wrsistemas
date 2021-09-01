@@ -10,15 +10,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Transactional(propagation=Propagation.REQUIRED, rollbackFor = Exception.class)
-public class SimpleJdbcInsertImplements extends SimpleJdbcInsert implements Serializable{
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+public class SimpleJdbcInsertImplements extends SimpleJdbcInsert implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public SimpleJdbcInsertImplements(DataSource dataSource) {
 		super(dataSource);
-		
-	}
 
+	}
 
 }
