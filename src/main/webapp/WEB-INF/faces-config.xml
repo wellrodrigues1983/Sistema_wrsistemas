@@ -13,7 +13,7 @@
 	  	<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
 	  	<source-class>javax.faces.component.UIViewRoot</source-class>
 	  </system-event-listener>
-	  
+	   
 	  
 	  <system-event-listener>
 	  	<system-event-listener-class>br.com.project.bean.geral.ViewScopeCallbackRegister</system-event-listener-class>

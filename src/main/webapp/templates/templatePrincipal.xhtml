@@ -18,8 +18,8 @@
 			id="jsJquery" />
 		<h:outputScript name="jquery-plugins.js" library="primefaces/jquery"
 			id="jsJqueryPlugin" />
-		<h:outputScript name="jquery.cookies.js" library="javascript"
-			id="jsJqueryCookie" />
+		<h:outputScript name="jquery.cookie.js" library="javascript"
+			id="jsJaqueryCookie" />
 		<h:outputStylesheet name="jquery-ui.css"
 			library="primefaces/jquery/ui" id="jsJqueryUi" />
 		<h:outputStylesheet name="primefaces.css" library="primefaces"
@@ -28,7 +28,7 @@
 			id="jsMaskMoneySistema" />
 		<h:outputScript name="jquery.maskedinput.js" library="javascript"
 			id="jsMaskInputSistema" />
-		<h:outputScript name="script.js" library="javascript"
+		<h:outputScript name="scripty.js" library="javascript"
 			id="jsScriptSistema" />
 		<h:outputScript name="jsf.js" library="javax.faces" />
 		<h:outputScript name="googlechart.js" library="javascript" />
@@ -40,7 +40,10 @@
 			id="cssStileSistema" />
 		<h:body>
 			<script type="text/javascript" charset="UTF-8">
-				$.noConflit();
+				$.noConflict();
+				localeData_pt_br();
+				initTamplete();
+				ocultarMenu();
 
 				/*Bloqueia F5 do teclado com jquery*/
 				$(document).keydown(function(e) {
@@ -63,40 +66,86 @@
 						id="spanlogo"> <h:graphicImage library="img"
 							name="logo.png" id="logoImg" styleClass="bordaImagen" />
 					</span> <span id="dadoslogin">Usuario:
-						#{entidadeBeanView.usuarioLogadoSecurity} 
-						<br id="quebraUser" />
-						Último Login: 
-						<h:outputLabel
+						#{entidadeBeanView.usuarioLogadoSecurity} <br id="quebraUser" />
+						Último Login: <h:outputLabel
 							value="#{entidadeBeanView.ultimoAcesso}" id="saidaUltimoAcesso">
 							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
 								dateStyle="long" timeStyle="full" timeZone="GMT-03:00" />
-						</h:outputLabel>
-						 <br id="quebraUltimoAcesso" /> 
-						 <a href="#" id="logoutSuperior" onclick="logout()" >Sair</a>
-<!-- 						Invalida a sessão do spring security -->
-						<script>						
-						function logout(contextPath) {
+						</h:outputLabel> <br id="quebraUltimoAcesso" /> <a href="#" id="logoutSuperior"
+						onclick="javascript:logout('#{request.contextPath}')">Sair</a>
 
-							var post = 'invalidar_session';
-							$.ajax(
-								{
-									type: "POST",
-									url: post
-								}).always(function(resposta) {
-									document.location = contextPath + '/j_spring_security_logout';
-								});
-						}
-						</script>
+					</span> <span id="menuSistema"
+						style="position: absolute; right: 25px; top: 48px; width: 20px;">
+						<a href="#" onclick="abrirMenupop();"> <h:graphicImage
+								library="img" name="setabaixo.png" styleClass="bordaimagen"
+								id="imaSetabaixo" />
+					</a>
 					</span>
+				</div>
+
+				<div id="menu">
+					<span id="iniciarmenu"> <h:graphicImage library="img"
+							name="iconemenu.png" styleClass="bordaimagen" id="iconemenu">Menu</h:graphicImage>
+					</span>
+				</div>
+
+				<div id="corpo" class="corpo">
+					<ui:insert name="corpo" />
+				</div>
+
+
+				<div id="menupop">
+
+					<sec:ifAnyGranted roles="MENSAGENS_ENVIAR_ACESSAR, ADMIN">
+						<p:commandLink actionListener="#{mensagemBeanView.novo}"
+							onsuccess="enviarMsgDialog.show();" value="Enviar menssagem"
+							immediate="true" style="display: block;" id="enviarMensagem"
+							ajax="true" process="@this">
+
+							<p:ajax immediate="true" listener="#{mensagemBeanView.novo}" />
+						</p:commandLink>
+					</sec:ifAnyGranted>
+
+					<a href='#' onclick="alterarSenhaDialog.show();"
+						style="display: block;" id="alterarSenha"> <span
+						style="display: block;" id="spanAlterarSenha">Alterar Senha</span>
+					</a>
+				</div>
+
+				<div id="barramenu">
+					<p:tieredMenu id="menuEsquero"
+						style="width: 185px; border: none; backgroud: none; color: #000;">
+
+						<p:menuitem value="Inicio" id="menuinicio"
+							onclick="redirecionarPagina('#{request.contextPath}', '/restrito/principal');"
+							ajax="true" />
+						<p:menuitem onclick="javascript:logout('#{request.contextPath}')"
+							value="Sair" id="menusair" ajax="true" />
+					</p:tieredMenu>
 				</div>
 
 			</div>
 
+			<p:dialog widgetVar="enviarMsgDialog" id="alterarMsgDialog"
+				width="800" modal="true" height="360" header="Enviar mensagem"
+				dynamic="true" appendToBody="false">
+				corpo
+			</p:dialog>
+
+			<p:dialog widgetVar="alterarSenhaDialog" id="alterarSenhaDialog"
+				width="240" modal="true" resizable="false" height="170"
+				header="Alterar Senha" dynamic="true" appendToBody="false">
+				corpo
+			</p:dialog>
+
+			
 
 		</h:body>
-
 	</h:form>
-
+	
+	<script type="text/javascript" charset="UTF-8">
+		carregarIdElementosPagina();
+	</script>
 </sec:isAuthenticated>
 
 </html>

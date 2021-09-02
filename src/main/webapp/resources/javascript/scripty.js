@@ -172,29 +172,29 @@ function localeData_pt_br() {
 	PrimeFaces.locales['pt'] = {
 		closeText: 'Fechar',
 		prevText: 'Anterior',
-		nextText: 'Pr�ximo',
-		currentText: 'Come�o',
+		nextText: 'Proximo',
+		currentText: 'Começo',
 		monthNames: ['Janeiro', 'Fevereiro', 'Marcio', 'Abril', 'Maio',
 			'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
 			'Dezembro'],
 		monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul',
 			'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-		dayNames: ['Domingo', 'Segunda', 'Ter�a', 'Quarta', 'Quinta',
-			'Sexta', 'S�bado'],
-		dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S�b'],
+		dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+			'Sexta', 'Sábado'],
+		dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
 		weekHeader: 'Semana',
 		firstDay: 0,
 		isRTL: false,
 		showMonthAfterYear: false,
 		yearSuffix: '',
-		timeOnlyTitle: 'S�o Horas',
+		timeOnlyTitle: 'São Horas',
 		timeText: 'Tempo',
 		hourText: 'Hora',
 		minuteText: 'Minuto',
 		secondText: 'Segundo',
 		ampm: false,
-		month: 'M�s',
+		month: 'Mês',
 		week: 'Semana',
 		day: 'Dia',
 		allDayText: 'Todo o Dia'
@@ -990,7 +990,7 @@ function invocaApplet(context) {
 
 	//Faz algo com ajax...
 
-	var url = context + "/applet/imprimir.jsp?impressoraImprimir=" + null;// passando null para pegar a padr�o
+	var url = context + "/applet/imprimir.jsp?impressoraImprimir=" + null;// passando null para pegar a padrão
 
 	var title = "Imprimindo...";
 	var w = "150";
