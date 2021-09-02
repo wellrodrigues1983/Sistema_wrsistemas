@@ -10,14 +10,14 @@ function reloadPage() {
 	$(function() {
 		location.reload();
 	});
-	
-}	
+
+}
 
 function validaDescricao(descricao) {
 	if (descricao === ' ' || descricao.trim() === '') {
 		return "Descrição não foi informada.";
 	}
-	 else {
+	else {
 		return descricao;
 	}
 }
@@ -25,13 +25,14 @@ function validaDescricao(descricao) {
 
 // invalida a sess�o do spring security
 function logout(contextPath) {
-	
-	document.location =	 contextPath + '/j_spring_security_logout';
+
 	var post = 'invalidar_session';
 	$.ajax(
-		{ 
-		  type: "POST", 
-		  url: post
+		{
+			type: "POST",
+			url: post
+		}).always(function(resposta) {
+			document.location = contextPath + '/j_spring_security_logout';
 		});
 }
 
@@ -43,23 +44,24 @@ function logout(contextPath) {
  * @param pagina
  * @param post
  */
-function redirecionarPage(context, pagina, post) { 
+function redirecionarPage(context, pagina, post) {
 	pagina = pagina + post + ".jsf";
 	$.ajax(
-			{ type: "POST",
-			  url: post
-			}).always(function(resposta) { 
-					document.location = context + pagina;
-			});
+		{
+			type: "POST",
+			url: post
+		}).always(function(resposta) {
+			document.location = context + pagina;
+		});
 }
 
-function redirecionarPagina(context, pagina) { 
+function redirecionarPagina(context, pagina) {
 	pagina = pagina + ".jsf";
 	document.location = context + pagina;
 }
 
-function invalidarSession(context, pagina) { 
-     document.location = (context + pagina + ".jsf");
+function invalidarSession(context, pagina) {
+	document.location = (context + pagina + ".jsf");
 }
 
 function permitNumber(e) {
@@ -94,14 +96,14 @@ function permitDecimal(e) {
 	}
 }
 
-function addMascaraDecimalMonetaria(id) { 
+function addMascaraDecimalMonetaria(id) {
 	var id = getValorElementPorId(id);
 	if (id != idundefined) {
-		jQuery(function($){
-			$("#"+id).maskMoney({precision:2, decimal:",", thousands:"."}); 
-		});	
+		jQuery(function($) {
+			$("#" + id).maskMoney({ precision: 2, decimal: ",", thousands: "." });
+		});
 	}
-	
+
 }
 
 function validarSenhaLogin() {
@@ -110,13 +112,13 @@ function validarSenhaLogin() {
 
 	if (j_username === null || j_username.trim() === '') {
 		alert("Informe o Login.");
-		 $("#j_username").focus();
+		$("#j_username").focus();
 		return false;
 	}
 
 	if (j_password === null || j_password.trim() === '') {
 		alert("Informe a Senha.");
-		 $("#j_password").focus();
+		$("#j_password").focus();
 		return false;
 	}
 
@@ -125,86 +127,86 @@ function validarSenhaLogin() {
 }
 
 function initTamplete() {
-$(document).ready(function() {
-	  $('#menupop').hide();
-	  $('#barramenu').hide();
-	  $('#barramenu').css("left", "-200px");
-	  $('#iniciarmenu').click(function() {
-	  	if ($('#barramenu').is(':visible')) {
-	  	  ocultarMenu();
-	  	} else {
-	  	  $('#barramenu').show();
-	  	  $('#barramenu').animate({"left":"0px"}, "slow");	
-	  	}
-	  });
+	$(document).ready(function() {
+		$('#menupop').hide();
+		$('#barramenu').hide();
+		$('#barramenu').css("left", "-200px");
+		$('#iniciarmenu').click(function() {
+			if ($('#barramenu').is(':visible')) {
+				ocultarMenu();
+			} else {
+				$('#barramenu').show();
+				$('#barramenu').animate({ "left": "0px" }, "slow");
+			}
+		});
 	});
 }
 
 
 function ocultarMenu() {
-	  $('#barramenu').animate({"left":"-200px"}, "slow", function() {
-	  	$('#barramenu').hide();
-	  });
-	}
-	
-	function abrirMenupop() {
-	  $('#menupop').show('slow').mouseleave(function() {
-	  	fecharMenupop();
-	  });
-	}
-	
-	function fecharMenupop() {
-	  if ($("#menupop").is(":visible")) {
-	  	$('#menupop').hide('slow');
-	  }
-	}
+	$('#barramenu').animate({ "left": "-200px" }, "slow", function() {
+		$('#barramenu').hide();
+	});
+}
 
-	function fecharPesquisa() {
-		$('#paginapesquisa').html('&nbsp;');
-		$('#valorpesquisa').val('');
-		$('#dialogopesquisa').hide();
-	}
-	
+function abrirMenupop() {
+	$('#menupop').show('slow').mouseleave(function() {
+		fecharMenupop();
+	});
+}
 
-	function localeData_pt_br() {
-		PrimeFaces.locales['pt'] = {
-			closeText : 'Fechar',
-			prevText : 'Anterior',
-			nextText : 'Pr�ximo',
-			currentText : 'Come�o',
-			monthNames : [ 'Janeiro', 'Fevereiro', 'Marcio', 'Abril', 'Maio',
-					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
-					'Dezembro' ],
-			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul',
-					'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-			dayNames : [ 'Domingo', 'Segunda', 'Ter�a', 'Quarta', 'Quinta',
-					'Sexta', 'S�bado' ],
-			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S�b' ],
-			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-			weekHeader : 'Semana',
-			firstDay : 0,
-			isRTL : false,
-			showMonthAfterYear : false,
-			yearSuffix : '',
-			timeOnlyTitle : 'S�o Horas',
-			timeText : 'Tempo',
-			hourText : 'Hora',
-			minuteText : 'Minuto',
-			secondText : 'Segundo',
-			ampm : false,
-			month : 'M�s',
-			week : 'Semana',
-			day : 'Dia',
-			allDayText : 'Todo o Dia'
-		};
-
+function fecharMenupop() {
+	if ($("#menupop").is(":visible")) {
+		$('#menupop').hide('slow');
 	}
+}
+
+function fecharPesquisa() {
+	$('#paginapesquisa').html('&nbsp;');
+	$('#valorpesquisa').val('');
+	$('#dialogopesquisa').hide();
+}
+
+
+function localeData_pt_br() {
+	PrimeFaces.locales['pt'] = {
+		closeText: 'Fechar',
+		prevText: 'Anterior',
+		nextText: 'Pr�ximo',
+		currentText: 'Come�o',
+		monthNames: ['Janeiro', 'Fevereiro', 'Marcio', 'Abril', 'Maio',
+			'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
+			'Dezembro'],
+		monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul',
+			'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+		dayNames: ['Domingo', 'Segunda', 'Ter�a', 'Quarta', 'Quinta',
+			'Sexta', 'S�bado'],
+		dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S�b'],
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+		weekHeader: 'Semana',
+		firstDay: 0,
+		isRTL: false,
+		showMonthAfterYear: false,
+		yearSuffix: '',
+		timeOnlyTitle: 'S�o Horas',
+		timeText: 'Tempo',
+		hourText: 'Hora',
+		minuteText: 'Minuto',
+		secondText: 'Segundo',
+		ampm: false,
+		month: 'M�s',
+		week: 'Semana',
+		day: 'Dia',
+		allDayText: 'Todo o Dia'
+	};
+
+}
 
 function validarCampoPesquisa(valor) {
-	if ( valor != undefined  &&  valor.value != undefined ) {
+	if (valor != undefined && valor.value != undefined) {
 		if (valor.value.trim() === '') {
 			valor.value = '';
-		}else {
+		} else {
 			valor.value = valor.value.trim();
 		}
 	}
@@ -215,17 +217,17 @@ function validarCampoPesquisa(valor) {
  * faciliades em obtencao de valores dos componentes bem como trabalhar com ajax
  */
 function carregarIdElementosPagina() {
-	 arrayIdsElementsPage = new Array;
-	 for (form = 0 ; form <= document.forms.length; form++){
-		 var formAtual = document.forms[form];
-		 if (formAtual != undefined) {
-			 for (i = 0; i< document.forms[form].elements.length; i++){
-				 if(document.forms[form].elements[i].id != '') {
-					 arrayIdsElementsPage[i] = document.forms[form].elements[i].id;
-				 }
-			 }	
-		 }
-	 }
+	arrayIdsElementsPage = new Array;
+	for (form = 0; form <= document.forms.length; form++) {
+		var formAtual = document.forms[form];
+		if (formAtual != undefined) {
+			for (i = 0; i < document.forms[form].elements.length; i++) {
+				if (document.forms[form].elements[i].id != '') {
+					arrayIdsElementsPage[i] = document.forms[form].elements[i].id;
+				}
+			}
+		}
+	}
 }
 /**
  * Retorno o valor do id do componente dentro do documento html passando como
@@ -234,14 +236,14 @@ function carregarIdElementosPagina() {
  * @param id
  */
 function getValorElementPorId(id) {
-	 carregarIdElementosPagina();
-	 for (i = 0; i< arrayIdsElementsPage.length; i++){
-		 var valor =  ""+arrayIdsElementsPage[i];
-		 if (valor.indexOf(id) > -1) {
+	carregarIdElementosPagina();
+	for (i = 0; i < arrayIdsElementsPage.length; i++) {
+		var valor = "" + arrayIdsElementsPage[i];
+		if (valor.indexOf(id) > -1) {
 			return valor;
+		}
 	}
-  }	
-	 return idundefined;
+	return idundefined;
 }
 
 /**
@@ -254,10 +256,10 @@ function getValorElementPorId(id) {
 function getValorElementPorIdJQuery(id) {
 	var id = getValorElementPorId(id);
 	if (id.trim() != idundefined) {
-		 return PrimeFaces.escapeClientId(id);
+		return PrimeFaces.escapeClientId(id);
 	}
-	
-	 return idundefined;
+
+	return idundefined;
 }
 
 /**
@@ -285,9 +287,9 @@ function addMascaraPesquisa(elemento) {
 	var vals = elemento.split("*");
 	var campoBanco = vals[0];
 	var typeCampo = vals[1];
-	
+
 	$(id).unmask();
-	$(id).unbind("keypress"); 
+	$(id).unbind("keypress");
 	$(id).unbind("keyup");
 	$(id).unbind("focus");
 	$(id).val('');
@@ -296,8 +298,8 @@ function addMascaraPesquisa(elemento) {
 			if (typeCampo === classTypeLong) {
 				$(id).keypress(permitNumber);
 			}
-			else if (typeCampo === classTypeBigDecimal) {	
-				$(id).maskMoney({precision:4, decimal:",", thousands:"."}); 
+			else if (typeCampo === classTypeBigDecimal) {
+				$(id).maskMoney({ precision: 4, decimal: ",", thousands: "." });
 			}
 			else if (typeCampo === classTypeDate) {
 				$(id).mask('99/99/9999');
@@ -328,7 +330,7 @@ function addBairroSelecionadoFilial(objeto) {
 	var bairroObj = JSON.parse(objeto);
 	$("#bai_codigo").val(bairroObj.bai_codigo);
 	$("#bai_descricao").val(validaDescricao(bairroObj.bai_descricao));
-	addBairroFilial(''+bairroObj.bai_codigo);
+	addBairroFilial('' + bairroObj.bai_codigo);
 }
 
 /**
@@ -340,7 +342,7 @@ function addBairroSelecionadoFunc(objeto) {
 	var bairroObj = JSON.parse(objeto);
 	$("#bai_codigo").val(bairroObj.bai_codigo);
 	$("#bai_descricao").val(validaDescricao(bairroObj.bai_descricao));
-	addBairroFunc(''+bairroObj.bai_codigo);
+	addBairroFunc('' + bairroObj.bai_codigo);
 }
 
 /**
@@ -352,7 +354,7 @@ function addBairroSelecionadoEntidade(objeto) {
 	var bairroObj = JSON.parse(objeto);
 	$("#bai_codigo").val(bairroObj.bai_codigo);
 	$("#bai_descricao").val(validaDescricao(bairroObj.bai_descricao));
-	addBairroEntidade(''+bairroObj.bai_codigo);
+	addBairroEntidade('' + bairroObj.bai_codigo);
 }
 
 /**
@@ -364,7 +366,7 @@ function addFilialSelecionadoEntidade(objeto) {
 	var filialObj = JSON.parse(objeto);
 	$("#fil_codigo").val(filialObj.fil_codigo);
 	$("#fil_descricao").val(validaDescricao(filialObj.fil_descricao));
-	addFilialEntidade(''+filialObj.fil_codigo);
+	addFilialEntidade('' + filialObj.fil_codigo);
 }
 
 /**
@@ -376,14 +378,14 @@ function addFilialSelecionadoFunc(objeto) {
 	var filialObj = JSON.parse(objeto);
 	$("#fil_codigo").val(filialObj.fil_codigo);
 	$("#fil_descricao").val(validaDescricao(filialObj.fil_descricao));
-	addFilialFunc(''+filialObj.fil_codigo);
+	addFilialFunc('' + filialObj.fil_codigo);
 }
 
 function addFilialSelecionadoComissao(objeto) {
 	var filialObj = JSON.parse(objeto);
 	$("#fil_codigo").val(filialObj.fil_codigo);
 	$("#fil_descricao").val(validaDescricao(filialObj.fil_descricao));
-	addFilialComissao(''+filialObj.fil_codigo);
+	addFilialComissao('' + filialObj.fil_codigo);
 }
 
 /**
@@ -395,42 +397,42 @@ function addCidadeSelecionadoFilial(objeto) {
 	var cidadeObj = JSON.parse(objeto);
 	$("#cid_codigo").val(cidadeObj.cid_codigo);
 	$("#cid_descricao").val(validaDescricao(cidadeObj.cid_descricao));
-	addCidadeFilial(''+cidadeObj.cid_codigo);
+	addCidadeFilial('' + cidadeObj.cid_codigo);
 }
 
 function addDestinoSelecionadoMsg(objeto) {
 	var entObj = JSON.parse(objeto);
 	$("#usr_destino").val(entObj.ent_codigo);
 	$("#loginDestino").val(validaDescricao(entObj.ent_login));
-	addDestinoMsg(''+entObj.ent_codigo);
+	addDestinoMsg('' + entObj.ent_codigo);
 }
 
 function addDestinoSelecionadoMsgDialog(objeto) {
 	var entObj = JSON.parse(objeto);
 	$("#usr_destinoMsgDialog").val(entObj.ent_codigo);
 	$("#loginDestinoMsgDialog").val(validaDescricao(entObj.ent_login));
-	addDestinoMsg(''+entObj.ent_codigo);
+	addDestinoMsg('' + entObj.ent_codigo);
 }
 
 function addFuncSelecionadoComissao(objeto) {
 	var entObj = JSON.parse(objeto);
 	$("#ent_codigo").val(entObj.ent_codigo);
 	$("#loginDestino").val(validaDescricao(entObj.ent_login));
-	addFuncComissao(''+entObj.ent_codigo);
+	addFuncComissao('' + entObj.ent_codigo);
 }
 
 function addContrutoraSelecionadoEmpreendimento(objeto) {
 	var entObj = JSON.parse(objeto);
 	$("#ent_codigo").val(entObj.ent_codigo);
 	$("#descricaoConstrutora").val(validaDescricao(entObj.ent_nomefantasia));
-	addConstrutoraEmpreendimento(''+entObj.ent_codigo);
+	addConstrutoraEmpreendimento('' + entObj.ent_codigo);
 }
 
 function addResponsavelSelecionadoTitulo(objeto) {
 	var entObj = JSON.parse(objeto);
 	$("#responsavelCodigo").val(entObj.ent_codigo);
 	$("#responsavelNome").val(validaDescricao(entObj.ent_nomefantasia));
-	addResponsavelTitulo(''+entObj.ent_codigo);
+	addResponsavelTitulo('' + entObj.ent_codigo);
 }
 
 
@@ -445,7 +447,7 @@ function addVendedorSelecionadoConstrutora(objeto) {
 	var entObj = JSON.parse(objeto);
 	$("#codigoVendedor").val(entObj.ent_codigo);
 	$("#descricaoVendedor").val(validaDescricao(entObj.ent_nomefantasia));
-	addVendedorContrutora(''+entObj.ent_codigo);
+	addVendedorContrutora('' + entObj.ent_codigo);
 }
 
 
@@ -459,7 +461,7 @@ function addCidadeSelecionadoEntidade(objeto) {
 	var cidadeObj = JSON.parse(objeto);
 	$("#cid_codigo").val(cidadeObj.cid_codigo);
 	$("#cid_descricao").val(validaDescricao(cidadeObj.cid_descricao));
-	addCidadeEntidade(''+cidadeObj.cid_codigo);
+	addCidadeEntidade('' + cidadeObj.cid_codigo);
 }
 
 
@@ -472,7 +474,7 @@ function addCidadeSelecionadoFunc(objeto) {
 	var cidadeObj = JSON.parse(objeto);
 	$("#cid_codigo").val(cidadeObj.cid_codigo);
 	$("#cid_descricao").val(validaDescricao(cidadeObj.cid_descricao));
-	addCidadeFunc(''+cidadeObj.cid_codigo);
+	addCidadeFunc('' + cidadeObj.cid_codigo);
 }
 
 /**
@@ -482,36 +484,36 @@ function addCidadeSelecionadoFunc(objeto) {
  */
 function pesquisarFilialPerderFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#fil_descricao").val('');
-	 $.get("findFilial?codFilial=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var filialObj = JSON.parse(resposta);
-	        	$("#fil_codigo").val(filialObj.fil_codigo);
-	        	$("#fil_descricao").val(validaDescricao(filialObj.fil_descricao));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#fil_descricao").val('');
+		$.get("findFilial?codFilial=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var filialObj = JSON.parse(resposta);
+				$("#fil_codigo").val(filialObj.fil_codigo);
+				$("#fil_descricao").val(validaDescricao(filialObj.fil_descricao));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
 
 function pesquisarResponsavelPerderFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#responsavelNome").val('');
-	 $.get("findResponsavel?codResponsavel=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var respObj = JSON.parse(resposta);
-	        	$("#responsavelCodigo").val(respObj.ent_codigo);
-	        	$("#responsavelNome").val(validaDescricao(respObj.ent_nomefantasia));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#responsavelNome").val('');
+		$.get("findResponsavel?codResponsavel=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var respObj = JSON.parse(resposta);
+				$("#responsavelCodigo").val(respObj.ent_codigo);
+				$("#responsavelNome").val(validaDescricao(respObj.ent_nomefantasia));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
@@ -524,140 +526,140 @@ function pesquisarResponsavelPerderFoco(id) {
  */
 function pesquisarBairroPerderFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#bai_descricao").val('');
-	 $.get("findBairro?codBairro=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var bairroObj = JSON.parse(resposta);
-	        	$("#bai_codigo").val(bairroObj.bai_codigo);
-	        	$("#bai_descricao").val(validaDescricao(bairroObj.bai_descricao));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#bai_descricao").val('');
+		$.get("findBairro?codBairro=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var bairroObj = JSON.parse(resposta);
+				$("#bai_codigo").val(bairroObj.bai_codigo);
+				$("#bai_descricao").val(validaDescricao(bairroObj.bai_descricao));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
 function pesquisarConstrutoraPerderFoco2(id) {
 	if (id.trim() != '') {
-		 statusDialog.show();
-		 $("#descricaoConstrutora").val('');
-		 $.get("findConstrutora2?codConstrutora=" + id, function(resposta) {
-		        if (resposta != 'erro' && resposta.trim() != ''){
-		        	var entObj = JSON.parse(resposta);
-		        	$("#ent_codigo").val(entObj.ent_codigo);
-		        	$("#descricaoConstrutora").val(validaDescricao(entObj.ent_nomefantasia));
-		        }
-		   })
-		   .always(function() { 
-			   statusDialog.hide();
+		statusDialog.show();
+		$("#descricaoConstrutora").val('');
+		$.get("findConstrutora2?codConstrutora=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entObj = JSON.parse(resposta);
+				$("#ent_codigo").val(entObj.ent_codigo);
+				$("#descricaoConstrutora").val(validaDescricao(entObj.ent_nomefantasia));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
 			});
-		}
+	}
 }
 
 function pesquisarConstrutoraPerderFoco(id) {
 	if (id.trim() != '') {
-		 statusDialog.show();
-		 $("#descricaoConstrutora").val('');
-		 $.get("findConstrutora?codConstrutora=" + id, function(resposta) {
-		        if (resposta != 'erro' && resposta.trim() != ''){
-		        	var entObj = JSON.parse(resposta);
-		        	$("#ent_codigo").val(entObj.ent_codigo);
-		        	$("#descricaoConstrutora").val(validaDescricao(entObj.ent_nomefantasia));
-		        }
-		   })
-		   .always(function() { 
-			   statusDialog.hide();
+		statusDialog.show();
+		$("#descricaoConstrutora").val('');
+		$.get("findConstrutora?codConstrutora=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entObj = JSON.parse(resposta);
+				$("#ent_codigo").val(entObj.ent_codigo);
+				$("#descricaoConstrutora").val(validaDescricao(entObj.ent_nomefantasia));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
 			});
-		}
+	}
 }
 
 function pesquisarVendedorPerderFoco(id) {
 	if (id.trim() != '') {
-		 statusDialog.show();
-		 $("#codigoVendedor").val('');
-		 $.get("findVendedor?codigoVendedor=" + id, function(resposta) {
-		        if (resposta != 'erro' && resposta.trim() != ''){
-		        	var entObj = JSON.parse(resposta);
-		        	$("#codigoVendedor").val(entObj.ent_codigo);
-		        	$("#descricaoVendedor").val(validaDescricao(entObj.ent_nomefantasia));
-		        }
-		   })
-		   .always(function() { 
-			   statusDialog.hide();
+		statusDialog.show();
+		$("#codigoVendedor").val('');
+		$.get("findVendedor?codigoVendedor=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entObj = JSON.parse(resposta);
+				$("#codigoVendedor").val(entObj.ent_codigo);
+				$("#descricaoVendedor").val(validaDescricao(entObj.ent_nomefantasia));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
 			});
-		}
+	}
 }
 
 
 function pesquisarUserDestinoPerderFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#loginDestino").val('');
-	 $.get("findUserDestino?codEntidade=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var entidadeObj = JSON.parse(resposta);
-	        	$("#usr_destino").val(entidadeObj.ent_codigo);
-	        	$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#loginDestino").val('');
+		$.get("findUserDestino?codEntidade=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entidadeObj = JSON.parse(resposta);
+				$("#usr_destino").val(entidadeObj.ent_codigo);
+				$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
 function pesquisarUserDestinoPerderFocoDialog(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#loginDestinoMsgDialog").val('');
-	 $.get("findUserDestino?codEntidade=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var entidadeObj = JSON.parse(resposta);
-	        	$("#usr_destinoMsgDialog").val(entidadeObj.ent_codigo);
-	        	$("#loginDestinoMsgDialog").val(validaDescricao(entidadeObj.ent_login));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#loginDestinoMsgDialog").val('');
+		$.get("findUserDestino?codEntidade=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entidadeObj = JSON.parse(resposta);
+				$("#usr_destinoMsgDialog").val(entidadeObj.ent_codigo);
+				$("#loginDestinoMsgDialog").val(validaDescricao(entidadeObj.ent_login));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
 
 function pesquisarFuncionarioComissaoPerdeFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#ent_codigo").val('');
-	 $.get("findFuncComissao?codFuncionario=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var entidadeObj = JSON.parse(resposta);
-	        	$("#ent_codigo").val(entidadeObj.ent_codigo);
-	        	$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#ent_codigo").val('');
+		$.get("findFuncComissao?codFuncionario=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entidadeObj = JSON.parse(resposta);
+				$("#ent_codigo").val(entidadeObj.ent_codigo);
+				$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
 
 function pesquisarEntidadePerderFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#loginDestino").val('');
-	 $.get("findEntidade?codEntidade=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var entidadeObj = JSON.parse(resposta);
-	        	$("#usr_destino").val(entidadeObj.ent_codigo);
-	        	$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#loginDestino").val('');
+		$.get("findEntidade?codEntidade=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var entidadeObj = JSON.parse(resposta);
+				$("#usr_destino").val(entidadeObj.ent_codigo);
+				$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
@@ -668,18 +670,18 @@ function pesquisarEntidadePerderFoco(id) {
  */
 function pesquisarCidadePerderFoco(id) {
 	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#cid_descricao").val('');
-	 $.get("findCidade?codCidade=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var cidadeObj = JSON.parse(resposta);
-	        	$("#cid_codigo").val(cidadeObj.cid_codigo);
-	        	$("#cid_descricao").val(validaDescricao(cidadeObj.cid_descricao));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
+		statusDialog.show();
+		$("#cid_descricao").val('');
+		$.get("findCidade?codCidade=" + id, function(resposta) {
+			if (resposta != 'erro' && resposta.trim() != '') {
+				var cidadeObj = JSON.parse(resposta);
+				$("#cid_codigo").val(cidadeObj.cid_codigo);
+				$("#cid_descricao").val(validaDescricao(cidadeObj.cid_descricao));
+			}
+		})
+			.always(function() {
+				statusDialog.hide();
+			});
 	}
 }
 
@@ -690,9 +692,9 @@ function pesquisarCidadePerderFoco(id) {
  */
 function addBairroFunc(id) {
 	if (id.trim() != '') {
-		 $.get("addBairroFunc?codBairro=" + id);
+		$.get("addBairroFunc?codBairro=" + id);
 	}
-} 
+}
 
 
 /**
@@ -702,42 +704,42 @@ function addBairroFunc(id) {
  */
 function addBairroFilial(id) {
 	if (id.trim() != '') {
-		 $.get("addBairroFilial?codBairro=" + id);
+		$.get("addBairroFilial?codBairro=" + id);
 	}
-} 
+}
 
 
 function addDestinoMsg(id) {
 	if (id.trim() != '') {
-		 $.get("addDestinoMsg?codEntidade=" + id);
+		$.get("addDestinoMsg?codEntidade=" + id);
 	}
-} 
+}
 
 function addFuncComissao(id) {
 	if (id.trim() != '') {
-		 $.get("addFuncComissao?codEntidade=" + id);
+		$.get("addFuncComissao?codEntidade=" + id);
 	}
-} 
+}
 
 
 function addConstrutoraEmpreendimento(id) {
 	if (id.trim() != '') {
-		 $.get("addConstrutoraEmpreendimento?codConstrutora=" + id);
+		$.get("addConstrutoraEmpreendimento?codConstrutora=" + id);
 	}
-} 
+}
 
 
 function addConstrutoraVendedor(id) {
 	if (id.trim() != '') {
-		 $.get("addConstrutoraVendedor?codConstrutora=" + id);
+		$.get("addConstrutoraVendedor?codConstrutora=" + id);
 	}
-} 
+}
 
 function addVendedorContrutora(id) {
 	if (id.trim() != '') {
-		 $.get("addVendedorContrutora?codVendedor=" + id);
+		$.get("addVendedorContrutora?codVendedor=" + id);
 	}
-} 
+}
 
 
 /**
@@ -747,9 +749,9 @@ function addVendedorContrutora(id) {
  */
 function addBairroEntidade(id) {
 	if (id.trim() != '') {
-		 $.get("addBairroEntidade?codBairro=" + id);
+		$.get("addBairroEntidade?codBairro=" + id);
 	}
-} 
+}
 
 
 /**
@@ -759,16 +761,16 @@ function addBairroEntidade(id) {
  */
 function addFilialEntidade(id) {
 	if (id.trim() != '') {
-		 $.get("addFilialEntidade?codFilial=" + id);
+		$.get("addFilialEntidade?codFilial=" + id);
 	}
-} 
+}
 
 
 function addResponsavelTitulo(id) {
 	if (id.trim() != '') {
-		 $.get("addResponsavelTitulo?codResponsavel=" + id);
+		$.get("addResponsavelTitulo?codResponsavel=" + id);
 	}
-} 
+}
 
 
 
@@ -779,15 +781,15 @@ function addResponsavelTitulo(id) {
  */
 function addFilialFunc(id) {
 	if (id.trim() != '') {
-		 $.get("addFilialFunc?codFilial=" + id);
+		$.get("addFilialFunc?codFilial=" + id);
 	}
-} 
+}
 
 function addFilialComissao(id) {
 	if (id.trim() != '') {
-		 $.get("addFilialComissao?codFilial=" + id);
+		$.get("addFilialComissao?codFilial=" + id);
 	}
-} 
+}
 
 
 
@@ -799,9 +801,9 @@ function addFilialComissao(id) {
  */
 function addCidadeFilial(id) {
 	if (id.trim() != '') {
-		 $.get("addCidadeFilial?codCidade=" + id);
+		$.get("addCidadeFilial?codCidade=" + id);
 	}
-} 
+}
 
 
 /**
@@ -811,9 +813,9 @@ function addCidadeFilial(id) {
  */
 function addCidadeFunc(id) {
 	if (id.trim() != '') {
-		 $.get("addCidadeFunc?codCidade=" + id);
+		$.get("addCidadeFunc?codCidade=" + id);
 	}
-} 
+}
 
 
 /**
@@ -823,37 +825,37 @@ function addCidadeFunc(id) {
  */
 function addCidadeEntidade(id) {
 	if (id.trim() != '') {
-		 $.get("addCidadeEntidade?codCidade=" + id);
+		$.get("addCidadeEntidade?codCidade=" + id);
 	}
-} 
+}
 
 function verificaMsgNaoLidas() {
-	 $.get("verificaMsgNaoLidas?isProcessoFacesJsf=false", function(resposta) {
-		 var respObj = JSON.parse(resposta);
-		 if (respObj.quantidadeMsgNaoLida != '0'){
-			 	$('#avisomensagem').show();
-				$('#contadormensagem').html(respObj.quantidadeMsgNaoLida);
-	      } else {
-				$('#avisomensagem').hide();// esconde o icone de carta
-				$('#contadormensagem').html("&nbsp;");
-		 }
-	  }); 
-} 
+	$.get("verificaMsgNaoLidas?isProcessoFacesJsf=false", function(resposta) {
+		var respObj = JSON.parse(resposta);
+		if (respObj.quantidadeMsgNaoLida != '0') {
+			$('#avisomensagem').show();
+			$('#contadormensagem').html(respObj.quantidadeMsgNaoLida);
+		} else {
+			$('#avisomensagem').hide();// esconde o icone de carta
+			$('#contadormensagem').html("&nbsp;");
+		}
+	});
+}
 
 
 function alterarSenha(context) {
-	 statusDialog.show();
-	 	document.location =	 context + "/cadastro/alterar_senha.jsf";
-	 statusDialog.hide();
+	statusDialog.show();
+	document.location = context + "/cadastro/alterar_senha.jsf";
+	statusDialog.hide();
 }
 
 function marcarDesmarcarLido(men_codigo, context) {
 	if (men_codigo != null && men_codigo != '') {
-	 $.get("marcarDesmarcarLido?men_codigo=" + men_codigo, function(resposta) {
-	   })
-	   .always(function() { 
-		   document.location = context + "/cadastro/msg_recebidas.jsf";
-	   });
+		$.get("marcarDesmarcarLido?men_codigo=" + men_codigo, function(resposta) {
+		})
+			.always(function() {
+				document.location = context + "/cadastro/msg_recebidas.jsf";
+			});
 	}
 	else {
 		alert("Selecione uma mensagem.");
@@ -861,34 +863,34 @@ function marcarDesmarcarLido(men_codigo, context) {
 }
 
 function responderMsg(context, destino) {
-	 $.get("responderMsg?destino=" + destino, function(resposta) {
-	   })
-	   .always(function() { 
-		   document.location = context + "/cadastro/cad_mensagem.jsf";
-	   });
+	$.get("responderMsg?destino=" + destino, function(resposta) {
+	})
+		.always(function() {
+			document.location = context + "/cadastro/cad_mensagem.jsf";
+		});
 }
 
 function copiarValorFantasiaRazao(campo) {
 	var idCampoDestino = getValorElementPorIdJQuery('ent_razao');
 	var textParaCopia = campo.value;
-	
+
 	var textCampoDestino = $(idCampoDestino).val();
-	
-	if (textCampoDestino === null || textCampoDestino === '' || textCampoDestino === ' '){
+
+	if (textCampoDestino === null || textCampoDestino === '' || textCampoDestino === ' ') {
 		$(idCampoDestino).val(textParaCopia);
 	}
-	
+
 }
 
 function confirmaLeituraMsg(men_codigo) {
-	
-	 $.get("confirmaLeituraMsg?men_codigo=" + men_codigo, function(resposta) {
-		 // alguma a��o aqui se precisar
-		 reloadPage();
-		}).fail(function() {
-		    alert( "Erro ao enviar confirma��o de leitura da mensagem." );
-		});
-	
+
+	$.get("confirmaLeituraMsg?men_codigo=" + men_codigo, function(resposta) {
+		// alguma a��o aqui se precisar
+		reloadPage();
+	}).fail(function() {
+		alert("Erro ao enviar confirma��o de leitura da mensagem.");
+	});
+
 }
 
 // Faz com que a tecla enter tenha efeito de TAB pulando de campo em campo
@@ -923,8 +925,8 @@ function gerenciaTeclaEnter() {
 }
 
 function processaDelete(e) {
-	
-	 
+
+
 	/*
 	 * var rows = document.getElementsByTagName('tr');
 	 * 
@@ -933,97 +935,97 @@ function processaDelete(e) {
 	 * alert('rowIndex=' + rows[x].rowIndex);
 	 *  }
 	 */
-	
-	$(document).ready(function(){
-	     $("table>tbody>tr").each(function(index, elemento){
-	    	 
-	    	 var selecionado = $(this).attr('aria-selected'); 
-	    	 
-	    	 if(selecionado != undefined 
-	    			 && selecionado != 'undefined' 
-	    			 && selecionado === 'true' || selecionado === true){
-	    		 
-	    	
-	    		 //$(this).attr("onkeypress", "javascript:alert('kkk')");
-	    		// $(this).attr("onkeydown", "javascript:alert('kkk')");
-	    		 //$(this).attr("onkeyup", "javascript:alert('kkk')");
-	    		 //$(this).attr("ondblclick", "javascript:alert('kkk')");
-	    		 //alert($(this).attr('data-ri') + " - " + $(this).attr('data-rk')); 
-	    	 }
-//	         $(elemento).bind('click', function(){
-	             //$(this).css('background-color', 'red');
-	//         });
-	     });
+
+	$(document).ready(function() {
+		$("table>tbody>tr").each(function(index, elemento) {
+
+			var selecionado = $(this).attr('aria-selected');
+
+			if (selecionado != undefined
+				&& selecionado != 'undefined'
+				&& selecionado === 'true' || selecionado === true) {
+
+
+				//$(this).attr("onkeypress", "javascript:alert('kkk')");
+				// $(this).attr("onkeydown", "javascript:alert('kkk')");
+				//$(this).attr("onkeyup", "javascript:alert('kkk')");
+				//$(this).attr("ondblclick", "javascript:alert('kkk')");
+				//alert($(this).attr('data-ri') + " - " + $(this).attr('data-rk')); 
+			}
+			//	         $(elemento).bind('click', function(){
+			//$(this).css('background-color', 'red');
+			//         });
+		});
 	});
 }
 
-function ocultaDataNacimento(value){
-	  if (value === 'TIPO_PESSOA_JURIDICA'){
-			
-			$("#labelDataNasc").hide(); 
-			
-			var id = getValorElementPorIdJQuery('ent_datanascimento');
-			$("#ent_datanascimento").removeClass('calendar');
-			$("#ent_datanascimento").addClass('calendarOculta');
-			$(id).hide();
-			
-			$("#msgent_datanascimento").hide();
-			
-	  }else {
-			$("#labelDataNasc").show();
-			
-			var id = getValorElementPorIdJQuery('ent_datanascimento');
-			$("#ent_datanascimento").removeClass('calendarOculta');
-			$("#ent_datanascimento").addClass('calendar');
-			$(id).show();
-			
-			$("#msgent_datanascimento").show();	
-	  }
+function ocultaDataNacimento(value) {
+	if (value === 'TIPO_PESSOA_JURIDICA') {
+
+		$("#labelDataNasc").hide();
+
+		var id = getValorElementPorIdJQuery('ent_datanascimento');
+		$("#ent_datanascimento").removeClass('calendar');
+		$("#ent_datanascimento").addClass('calendarOculta');
+		$(id).hide();
+
+		$("#msgent_datanascimento").hide();
+
+	} else {
+		$("#labelDataNasc").show();
+
+		var id = getValorElementPorIdJQuery('ent_datanascimento');
+		$("#ent_datanascimento").removeClass('calendarOculta');
+		$("#ent_datanascimento").addClass('calendar');
+		$(id).show();
+
+		$("#msgent_datanascimento").show();
 	}
+}
 
 
 
 
 function invocaApplet(context) {
-	
-	   //Faz algo com ajax...
-	    
-		var url = context + "/applet/imprimir.jsp?impressoraImprimir=" + null;// passando null para pegar a padr�o
-		
-		var title = "Imprimindo...";
-		var w = "150"; 
-		var h = "130";
-	    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-	    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
 
-	    width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-	    height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+	//Faz algo com ajax...
 
-	    var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
-	    var top = ((height / 2) - (h / 2)) + dualScreenTop;  
-	    window.open(url, title, 'scrollbars=true, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+	var url = context + "/applet/imprimir.jsp?impressoraImprimir=" + null;// passando null para pegar a padr�o
+
+	var title = "Imprimindo...";
+	var w = "150";
+	var h = "130";
+	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+	var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+	width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+	height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+	var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+	var top = ((height / 2) - (h / 2)) + dualScreenTop;
+	window.open(url, title, 'scrollbars=true, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 }
 
 function invocaAppletFileLocal(context) {
-	var url = context + "/applet/ler_file_local.jsp"; 
+	var url = context + "/applet/ler_file_local.jsp";
 
 	var title = "Lendo arquivo local...";
 	var w = "220";
 	var h = "200";
-    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+	var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
 
-    width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+	width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+	height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
 
-    var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
-    var top = ((height / 2) - (h / 2)) + dualScreenTop;  
-    window.open(url, title, 'scrollbars=true, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+	var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+	var top = ((height / 2) - (h / 2)) + dualScreenTop;
+	window.open(url, title, 'scrollbars=true, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 }
 
 function respostaApplet(respostaProperties) {
 	respostaPropertiesElement = document.getElementById("respostaPropertiesElement");
-	if (respostaProperties != ''){
+	if (respostaProperties != '') {
 		respostaPropertiesElement.value = respostaProperties;
 	}
 	// Faz qualquer coisa aqui
@@ -1032,17 +1034,17 @@ function respostaApplet(respostaProperties) {
 function executeApplet(context) {
 	contextApp = context;
 	var attributes = {
-		code : 'JalisApplet.class',
-		archive : 'jalisApplet.jar',
-		codebase : context + '/applet/',
-		type : 'applet',
-		name : 'jalisApplet',
-		width : 0,
-		height : 0
+		code: 'JalisApplet.class',
+		archive: 'jalisApplet.jar',
+		codebase: context + '/applet/',
+		type: 'applet',
+		name: 'jalisApplet',
+		width: 0,
+		height: 0
 	};
 	var parameters = {
-		parametroApplet : 'parametroApplet teste valor',
-		Permissions : 'all-permissions'
+		parametroApplet: 'parametroApplet teste valor',
+		Permissions: 'all-permissions'
 	};
 	var version = '1.6';
 	deployJava.runApplet(attributes, parameters, version);
@@ -1052,7 +1054,7 @@ function executeApplet(context) {
  * Mostra erro do applet
  * @param erro
  */
-function erroApplet(erro) { 
+function erroApplet(erro) {
 	alert(erro);
 }
 

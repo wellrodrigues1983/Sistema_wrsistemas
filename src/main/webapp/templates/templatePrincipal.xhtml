@@ -53,24 +53,43 @@
 			<div id="msgError">
 				<p:growl id="msg" showDetail="false" sticky="true" redisplay="true"
 					autoUpdate="true" life="6000" />
-					<p:tooltip id="toolTipFocus" globalSelector="a, :input, :button"
-					showEvent="focus" hideEvent="blur"/>
+				<p:tooltip id="toolTipFocus" globalSelector="a, :input, :button"
+					showEvent="focus" hideEvent="blur" />
 			</div>
 
 			<div id="container">
 				<div id="topo">
-					<span style="position: absolute; left: 20px; top: 14px" id="spanlogo">
-						<h:graphicImage library="img" name="logo.png" id="logoImg" styleClass="bordaImagen"/>
-					</span>
-					<span id="dadoslogin">Usuario: #{entidadeBeanView.usuarioLogadoSecurity}
-					<br id="quebraUser"/>
-					Último Login:
-					<h:outputLabel value="#{entidadeBeanView.ultimoAcesso}" id="saidaUltimoAcesso">
-						<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss" dateStyle="long" timeStyle="full" timeZone="GTM-03:00"/>
-					</h:outputLabel>
+					<span style="position: absolute; left: 20px; top: 14px"
+						id="spanlogo"> <h:graphicImage library="img"
+							name="logo.png" id="logoImg" styleClass="bordaImagen" />
+					</span> <span id="dadoslogin">Usuario:
+						#{entidadeBeanView.usuarioLogadoSecurity} 
+						<br id="quebraUser" />
+						Último Login: 
+						<h:outputLabel
+							value="#{entidadeBeanView.ultimoAcesso}" id="saidaUltimoAcesso">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
+								dateStyle="long" timeStyle="full" timeZone="GMT-03:00" />
+						</h:outputLabel>
+						 <br id="quebraUltimoAcesso" /> 
+						 <a href="#" id="logoutSuperior" onclick="logout()" >Sair</a>
+<!-- 						Invalida a sessão do spring security -->
+						<script>						
+						function logout(contextPath) {
+
+							var post = 'invalidar_session';
+							$.ajax(
+								{
+									type: "POST",
+									url: post
+								}).always(function(resposta) {
+									document.location = contextPath + '/j_spring_security_logout';
+								});
+						}
+						</script>
 					</span>
 				</div>
-				
+
 			</div>
 
 

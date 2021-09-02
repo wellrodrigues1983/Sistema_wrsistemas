@@ -19,5 +19,6 @@ public class SimpleJdbcInsertImplements extends SimpleJdbcInsert implements Seri
 		super(dataSource);
 
 	}
-
+	
+	
 }
