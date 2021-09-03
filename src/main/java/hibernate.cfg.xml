@@ -14,7 +14,7 @@
 		<property name="hibernate.jdbc.batch_size">100</property>
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		<property name="hibernate.transaction.auto_close_session">true</property>
-<!-- 		<property name="hibernate.hbm2ddl.auto">create</property> -->
+<!-- 		<property name="hibernate.hbm2ddl.auto">update</property> -->
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.generate_statistics">false</property>
@@ -26,7 +26,9 @@
 		
 		
 		<mapping class="br.com.project.model.classes.Entidade"/>
-		 
+		<mapping class="br.com.project.model.classes.Pais"/>
+		<mapping class="br.com.project.model.classes.Cidade"/>
+		<mapping class="br.com.project.model.classes.Estado"/> 
 		 
 		<listener class="org.hibernate.envers.event.AuditEventListener"
 			type="post-insert" />
